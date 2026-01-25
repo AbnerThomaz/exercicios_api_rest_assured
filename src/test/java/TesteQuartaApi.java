@@ -1,18 +1,22 @@
-import io.restassured.RestAssured;
-import org.hamcrest.Matchers;
+import config.BaseTest;
+import org.junit.Test;
+import static io.restassured.RestAssured.*;
+import static org.hamcrest.Matchers.*;
 
-public class TesteQuartaApi {
+public class TesteQuartaApi extends BaseTest {
+
+    @Test
     public void apiComRegrasImparPar(){
-        String url = "http://localhost:8080/exercicios/parOuImpar?numero=1";
+        String endPoint = "/exercicios/parOuImpar?numero=1";
 
-        RestAssured.given()
+        given()
                 .log().all()
                 .when()
-                .get(url)
+                .get(endPoint)
                 .then()
                 .log().all()
                 .assertThat()
                 .statusCode(200)
-                .body(Matchers.containsString("O numero 1 é impar"));
+                .body(containsString("O numero 1 é impar"));
     }
 }

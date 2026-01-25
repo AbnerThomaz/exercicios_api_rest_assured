@@ -1,18 +1,23 @@
-import io.restassured.RestAssured;
-import org.hamcrest.Matchers;
+import config.BaseTest;
+import org.junit.Test;
+import static io.restassured.RestAssured.*;
+import static org.hamcrest.Matchers.*;
 
-public class TesteTerceiraApi {
+public class TesteTerceiraApi extends BaseTest{
+
+    @Test
     public void apiPathParameters (){
-        String url = "http://localhost:8080/api/primeiraApiV2/testecomsucesso";
+        String pathParameter = "testecomsucesso";
+        String endPoint = "/api/primeiraApiV2/"+pathParameter;
 
-        RestAssured.given()
+        given()
                 .log().all()
                 .when()
-                .get(url)
+                .get(endPoint)
                 .then()
                 .log().all()
                 .assertThat()
                 .statusCode(200)
-                .body(Matchers.containsString("testecomsucesso"));
+                .body(containsString(pathParameter));
     }
 }

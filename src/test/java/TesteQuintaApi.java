@@ -3,15 +3,13 @@ import org.junit.Test;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
-public class TesteSegundaApi extends BaseTest {
+public class TesteQuintaApi extends BaseTest {
 
     @Test
-    public void testeApiQueryParamSucesso(){
-        String endPoint = "/api/primeiraApiV1";
-        String queryParameter = "Teste com Sucesso";
+    public void apiComRegrasImparPar(){
+        String endPoint = "/exercicios/parOuImpar?numero=1";
 
         given()
-                .queryParam("palavra",queryParameter)
                 .log().all()
                 .when()
                 .get(endPoint)
@@ -19,11 +17,6 @@ public class TesteSegundaApi extends BaseTest {
                 .log().all()
                 .assertThat()
                 .statusCode(200)
-                .body(containsString(queryParameter));
+                .body(containsString("O numero 1 é impar"));
     }
 }
-
-
-
-
-
